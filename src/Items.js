@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, FormControl, InputLabel, OutlinedInput } from "@mui/material";
 import db, { auth } from "./firebase";
+import firebase from "firebase";
 
 import Nav from "./Nav";
 import Profile from "./Profile";
@@ -36,6 +37,7 @@ function Items() {
           photo: auth.currentUser.photoURL,
           amount: amount,
           deposit: deposit,
+          time: firebase.firestore.FieldValue.serverTimestamp()
         })
         .then(async () => {
           await setAmount("");
