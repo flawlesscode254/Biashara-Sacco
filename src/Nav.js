@@ -15,6 +15,7 @@ import Login from "./Login";
 
 function Nav() {
   const [anchorEl, setAnchorEl] = useState(null);
+
   const open = Boolean(anchorEl);
   const [user] = useAuthState(auth);
 

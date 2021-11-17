@@ -12,8 +12,7 @@ const Required = ({ data }) => {
         >
           <h3>{`Balance amount: Sh. ${item.data.deposit.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</h3>
           <h3>{`Daily amount: Sh. ${item.data.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}</h3>
-          <p>{`Created at: ${new Date(item.data.time?.toDate()).toDateString() + " " + " "}${" "}
-          ${new Date(item.data.time?.toDate()).toLocaleTimeString()}`}</p>
+          <p>{`Last at: ${new Date(item.data.time?.toDate()).toDateString()}`}</p>
         </Box>
       ))}
     </div>

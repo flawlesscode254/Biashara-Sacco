@@ -9,7 +9,7 @@ import Profile from "./Profile";
 function Items() {
   const [amount, setAmount] = useState();
   const [deposit, setDeposit] = useState();
-  const [data, setData] = useState([]);
+  const [info, setInfo] = useState([]);
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
@@ -17,7 +17,7 @@ function Items() {
         db.collection("users")
           .where("email", "==", auth.currentUser.email)
           .onSnapshot((snapshot) =>
-            setData(
+            setInfo(
               snapshot.docs.map((doc) => ({
                 id: doc.id,
                 data: doc.data(),
@@ -28,27 +28,49 @@ function Items() {
     });
   }, []);
 
+  const now = new Date().getDate();
+
+  const getMoney = () => {
+    const decrement = firebase.firestore.FieldValue.increment(
+      -info[0].data.amount
+    );
+    db.collection("users").doc(auth.currentUser.uid).update({
+      deposit: decrement,
+      time: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+  };
+
   const sendInfo = () => {
-      db.collection("users")
-        .doc(auth.currentUser.uid)
-        .set({
-          name: auth.currentUser.displayName,
-          email: auth.currentUser.email,
-          photo: auth.currentUser.photoURL,
-          amount: amount,
-          deposit: deposit,
-          time: firebase.firestore.FieldValue.serverTimestamp()
-        })
-        .then(async () => {
-          await setAmount("");
-          await setDeposit("");
-        });
+    db.collection("users")
+      .doc(auth.currentUser.uid)
+      .set({
+        name: auth.currentUser.displayName,
+        email: auth.currentUser.email,
+        photo: auth.currentUser.photoURL,
+        amount: Number(amount),
+        deposit: Number(deposit),
+        time: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+      .then(async () => {
+        await setAmount("");
+        await setDeposit("");
+      });
   };
 
   return (
     <div>
       <Nav />
-      {data.length > 0 ? (
+      {info && (
+        <div>
+          {now !== new Date(info[0]?.data.time?.toDate()).getDate() && (
+            <Button onClick={getMoney} color="secondary">
+              Get today's amount
+            </Button>
+          )}
+        </div>
+      )}
+
+      {info.length > 0 ? (
         <div
           style={{
             display: "flex",
@@ -58,7 +80,7 @@ function Items() {
             marginTop: 70,
           }}
         >
-          <Profile data={data} />
+          <Profile data={info} />
         </div>
       ) : (
         <div
