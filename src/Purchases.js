@@ -1,11 +1,13 @@
 import React from 'react'
+
 import Nav from './Nav'
+import Emergency from "./Emergency"
 
 function Purchases() {
     return (
         <div>
             <Nav />
-            <p>Purchases</p>
+            <Emergency />
         </div>
     )
 }

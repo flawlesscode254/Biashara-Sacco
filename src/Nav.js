@@ -35,8 +35,8 @@ function Nav() {
           <Link className="links" to="/info">
             <p>Info</p>
           </Link>
-          <Link className="links" to="/previous">
-            <p>Previous</p>
+          <Link className="links" to="/emergency">
+            <p>Emergency</p>
           </Link>
           <React.Fragment>
             <Box
