@@ -13,7 +13,7 @@ const RepayMent = () => {
   const [error, setError] = useState("");
   const [interest, setInterest] = useState();
   const [started, setStarted] = useState(false);
-  // const [current, setCurrent] = useState("")
+  const [current, setCurrent] = useState("")
 
   const history = useHistory()
   useEffect(() => {
@@ -34,8 +34,8 @@ const RepayMent = () => {
             snapshot.docs.forEach(doc => (
               // eslint-disable-next-line
                 setData(doc.data().amount),
-                setInterest(doc.data().interest)
-                // setCurrent(doc.data().state)
+                setInterest(doc.data().interest),
+                setCurrent(doc.data().state)
               )
             )
           );

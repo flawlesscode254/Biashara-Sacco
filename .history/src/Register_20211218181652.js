@@ -1,15 +1,17 @@
 import Button from "@mui/material/Button";
 import React, { useState, useEffect } from "react";
 import "./Login.css";
-import { auth } from "./firebase";
+import db, { auth } from "./firebase";
 import SubNavigation from "./SubNavigation";
 import { FormControl, InputLabel, OutlinedInput } from "@mui/material";
 import Box from "@mui/material/Box";
 import { Link, useHistory } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 
-function Login() {
+function Register() {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [started, setStarted] = useState(false);
@@ -18,24 +20,32 @@ function Login() {
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
-        if (authUser) {
-          if (auth?.currentUser?.email === "duncanii414@gmail.com") {
-            history.push("/borrowed");
-          }
-          else {
-            history.push("/request");
-          }
+      if (authUser) {
+        if (auth?.currentUser?.email === "duncanii414@gmail.com") {
+          history.push("/borrowed");
         }
-      });
+        else {
+          history.push("/request");
+        }
+      }
+    });
             // eslint-disable-next-line
   }, [])
 
-  const signIn = async () => {
+  const signUp = async () => {
     await setStarted(!started);
     await auth
-      .signInWithEmailAndPassword(email, password)
-      .then(async () => {
+      .createUserWithEmailAndPassword(email, password)
+      .then(async (authUser) => {
+        await authUser.user.updateProfile({
+          displayName: username
+        });
+        await db.collection("users").add({
+          phoneNumber: phone
+        })
+        await setUsername("");
         await setEmail("");
+        await setPhone("");
         await setPassword("");
         await setStarted(started);
         if (email === "duncanii414@gmail.com") {
@@ -47,7 +57,9 @@ function Login() {
       })
       .catch((err) => {
         setError(err.message);
+        setUsername("");
         setEmail("");
+        setPhone("");
         setPassword("");
         setStarted(started);
       });
@@ -65,7 +77,7 @@ function Login() {
             {error}
           </p>
         )}
-        <h2>Log In to your account</h2>
+        <h2>Register an account</h2>
         <Box component="h3" sx={{ p: 2, border: "1px dashed grey" }}>
           <div
             style={{
@@ -75,6 +87,17 @@ function Login() {
               alignItems: "center",
             }}
           >
+            <FormControl sx={{ m: 3, width: "45ch" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Enter your full name
+              </InputLabel>
+              <OutlinedInput
+                id="outlined-adornment-password"
+                value={username}
+                onChange={(val) => setUsername(val.target.value)}
+                label="Enter your full name"
+              />
+            </FormControl>
             <FormControl sx={{ m: 3, width: "45ch" }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
                 Enter your email address
@@ -88,14 +111,26 @@ function Login() {
             </FormControl>
             <FormControl sx={{ m: 3, width: "45ch" }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">
-                Enter your password
+                Enter your phone number
+              </InputLabel>
+              <OutlinedInput
+                type="number"
+                id="outlined-adornment-password"
+                value={phone}
+                onChange={(val) => setPhone(val.target.value)}
+                label="Enter your phone number"
+              />
+            </FormControl>
+            <FormControl sx={{ m: 3, width: "45ch" }} variant="outlined">
+              <InputLabel htmlFor="outlined-adornment-password">
+                Enter password
               </InputLabel>
               <OutlinedInput
                 type="password"
                 id="outlined-adornment-password"
                 value={password}
                 onChange={(val) => setPassword(val.target.value)}
-                label="Enter your password"
+                label="Enter password"
               />
             </FormControl>
             {started ? (
@@ -110,9 +145,9 @@ function Login() {
                 color="primary"
                 type="submit"
                 variant="outlined"
-                onClick={signIn}
+                onClick={signUp}
               >
-                Log In
+                Register
               </Button>
             )}
             <div
@@ -129,11 +164,12 @@ function Login() {
                   marginRight: 30,
                 }}
               >
-                Don't have an account?
+                Already have an account?
               </p>
+
               <Link
                 to={{
-                  pathname: "/register",
+                  pathname: "/",
                 }}
               >
                 <Button
@@ -146,7 +182,7 @@ function Login() {
                   type="submit"
                   variant="outlined"
                 >
-                  Register
+                  Log In
                 </Button>
               </Link>
             </div>
@@ -157,4 +193,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

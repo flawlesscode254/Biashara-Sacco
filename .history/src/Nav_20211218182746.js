@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 import Box from "@mui/material/Box";
@@ -27,7 +27,7 @@ function Nav() {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         db.collection("loans")
-          .where("email", "==", auth?.currentUser?.email)
+          .where("email", "==", auth?.currentUser.email)
           .onSnapshot((snapshot) =>
             snapshot.docs.forEach((doc) => setData(doc.data().amount))
           );
@@ -164,7 +164,7 @@ function Nav() {
                     color: "red",
                   }}
                 >
-                  {`Sh. ${data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                  {data}
                 </p>
               )}
 

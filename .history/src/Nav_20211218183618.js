@@ -165,6 +165,7 @@ function Nav() {
                   }}
                 >
                   {`Sh. ${data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                  
                 </p>
               )}
 

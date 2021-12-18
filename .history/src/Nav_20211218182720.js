@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 import Box from "@mui/material/Box";
@@ -10,7 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import { useAuthState } from "react-firebase-hooks/auth";
-import db, { auth } from "./firebase";
+import { auth } from "./firebase";
 import { useHistory } from "react-router-dom";
 
 import Login from "./Login";
@@ -21,13 +21,13 @@ function Nav() {
   const open = Boolean(anchorEl);
   const [user] = useAuthState(auth);
   const history = useHistory();
-  const [data, setData] = useState();
+  const [data, setData] = useState()
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
         db.collection("loans")
-          .where("email", "==", auth?.currentUser?.email)
+          .where("email", "==", auth?.currentUser.email)
           .onSnapshot((snapshot) =>
             snapshot.docs.forEach((doc) => setData(doc.data().amount))
           );
@@ -158,16 +158,11 @@ function Nav() {
               <Link className="links" to="/progress">
                 <p>Payment Progress</p>
               </Link>
-              {data && (
-                <p
-                  style={{
-                    color: "red",
-                  }}
-                >
-                  {`Sh. ${data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
-                </p>
-              )}
-
+              <p style={{
+                color: "red"
+              }}>
+                
+              </p>
               <React.Fragment>
                 <Box
                   sx={{

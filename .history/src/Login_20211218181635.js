@@ -48,7 +48,7 @@ function Login() {
       .catch((err) => {
         setError(err.message);
         setEmail("");
-        setPassword("");
+        await setPassword("");
         setStarted(started);
       });
   };

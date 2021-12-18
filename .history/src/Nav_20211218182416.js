@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./App.css";
 import Box from "@mui/material/Box";
@@ -10,7 +10,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import { useAuthState } from "react-firebase-hooks/auth";
-import db, { auth } from "./firebase";
+import { auth } from "./firebase";
 import { useHistory } from "react-router-dom";
 
 import Login from "./Login";
@@ -21,20 +21,6 @@ function Nav() {
   const open = Boolean(anchorEl);
   const [user] = useAuthState(auth);
   const history = useHistory();
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    auth.onAuthStateChanged((authUser) => {
-      if (authUser) {
-        db.collection("loans")
-          .where("email", "==", auth?.currentUser?.email)
-          .onSnapshot((snapshot) =>
-            snapshot.docs.forEach((doc) => setData(doc.data().amount))
-          );
-      }
-    });
-    // eslint-disable-next-line
-  }, []);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -158,16 +144,6 @@ function Nav() {
               <Link className="links" to="/progress">
                 <p>Payment Progress</p>
               </Link>
-              {data && (
-                <p
-                  style={{
-                    color: "red",
-                  }}
-                >
-                  {`Sh. ${data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
-                </p>
-              )}
-
               <React.Fragment>
                 <Box
                   sx={{
@@ -182,7 +158,11 @@ function Nav() {
                       size="small"
                       sx={{ ml: 2 }}
                     >
-                      <Avatar sx={{ width: 32, height: 32 }} />
+                      {user && (
+                        <Avatar
+                          sx={{ width: 32, height: 32 }}
+                        />
+                      )}
                     </IconButton>
                   </Tooltip>
                 </Box>
@@ -221,11 +201,19 @@ function Nav() {
                   anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                 >
                   <MenuItem disabled={true}>
-                    <Avatar sx={{ width: 32, height: 32 }} />
+                    <Avatar
+                      src={`https://avatars.dicebear.com/api/avataaars/${
+                        auth?.currentUser?.displayName.split(" ")[0]
+                      }.svg`}
+                    />
                     {auth?.currentUser.displayName}
                   </MenuItem>
                   <MenuItem disabled={true}>
-                    <Avatar sx={{ width: 32, height: 32 }} />
+                    <Avatar
+                      src={`https://avatars.dicebear.com/api/avataaars/${
+                        auth?.currentUser?.displayName.split(" ")[0]
+                      }.svg`}
+                    />
                     {auth?.currentUser.email}
                   </MenuItem>
                   <MenuItem onClick={logOut}>

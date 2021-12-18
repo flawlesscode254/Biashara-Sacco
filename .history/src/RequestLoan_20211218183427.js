@@ -23,18 +23,18 @@ function RequestLoan() {
     // eslint-disable-next-line
   }, []);
 
-  // useEffect(() => {
-  //   auth.onAuthStateChanged((authUser) => {
-  //     if (authUser) {
-  //       db.collection("loans")
-  //         .where("email", "==", auth?.currentUser.email)
-  //         .onSnapshot((snapshot) =>
-  //           snapshot.docs.forEach((doc) => setData(doc.data().amount))
-  //         );
-  //     }
-  //   });
-  //   // eslint-disable-next-line
-  // }, []);
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        db.collection("loans")
+          .where("email", "==", auth?.currentUser.email)
+          .onSnapshot((snapshot) =>
+            snapshot.docs.forEach((doc) => setData(doc.data().amount))
+          );
+      }
+    });
+    // eslint-disable-next-line
+  }, []);
 
   const sendInfo = async () => {
     // if (data === 0 || data === null) {

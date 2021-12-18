@@ -164,7 +164,7 @@ function Nav() {
                     color: "red",
                   }}
                 >
-                  {`Sh. ${data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+                  {data.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </p>
               )}
 

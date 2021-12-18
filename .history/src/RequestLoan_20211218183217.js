@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 
 function RequestLoan() {
   const [amount, setAmount] = useState();
-  // const [data, setData] = useState();
+  const [data, setData] = useState();
   const [error, setError] = useState("");
   const [started, setStarted] = useState(false);
 
@@ -23,18 +23,18 @@ function RequestLoan() {
     // eslint-disable-next-line
   }, []);
 
-  // useEffect(() => {
-  //   auth.onAuthStateChanged((authUser) => {
-  //     if (authUser) {
-  //       db.collection("loans")
-  //         .where("email", "==", auth?.currentUser.email)
-  //         .onSnapshot((snapshot) =>
-  //           snapshot.docs.forEach((doc) => setData(doc.data().amount))
-  //         );
-  //     }
-  //   });
-  //   // eslint-disable-next-line
-  // }, []);
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        db.collection("loans")
+          .where("email", "==", auth?.currentUser.email)
+          .onSnapshot((snapshot) =>
+            snapshot.docs.forEach((doc) => setData(doc.data().amount))
+          );
+      }
+    });
+    // eslint-disable-next-line
+  }, []);
 
   const sendInfo = async () => {
     // if (data === 0 || data === null) {
@@ -59,12 +59,12 @@ function RequestLoan() {
           setError(err.message);
           setStarted(started);
         });
-    // } else if (data > 0) {
-    //   setError(
-    //     "You cannot request another loan before paying off the previous one!!"
-    //   );
-    //   setAmount("");
-    // }
+    } else if (data > 0) {
+      setError(
+        "You cannot request another loan before paying off the previous one!!"
+      );
+      setAmount("");
+    }
   };
 
   return (

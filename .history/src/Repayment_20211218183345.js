@@ -34,7 +34,7 @@ const RepayMent = () => {
             snapshot.docs.forEach(doc => (
               // eslint-disable-next-line
                 setData(doc.data().amount),
-                setInterest(doc.data().interest)
+                setInterest(doc.data().interest),
                 // setCurrent(doc.data().state)
               )
             )
