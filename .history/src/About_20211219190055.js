@@ -29,8 +29,7 @@ const About = () => {
     {/* side navigation */}
       <div
         style={{
-          position: "absolute",
-          height: "100%"
+          position: "absolute"
         }}
       >
         <SideNav />

@@ -29,8 +29,15 @@ const About = () => {
     {/* side navigation */}
       <div
         style={{
-          position: "absolute",
-          height: "100%"
+          padding: 10,
+          top: 37,
+          left: 0,
+          width: "100%",
+          marginTop: 10,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "sticky"
         }}
       >
         <SideNav />

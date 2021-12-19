@@ -12,7 +12,7 @@ export default function MenuListComposition() {
         <MenuList style={{
             padding: 10,
             backgroundColor: "#010c40",
-            height: "90vh",
+            height: "80vh",
             display: "flex",
             justifyContent: "space-around",
             flexDirection: "column"
