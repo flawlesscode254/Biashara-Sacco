@@ -26,7 +26,7 @@ function Register() {
           history.push("/borrowed");
         }
         else {
-          history.push("/request");
+          history.push("/about");
         }
       }
     });
@@ -55,7 +55,7 @@ function Register() {
           await history.push("/borrowed");
         }
         else {
-          await history.push("/request");
+          await history.push("/about");
         }
       })
       .catch((err) => {
