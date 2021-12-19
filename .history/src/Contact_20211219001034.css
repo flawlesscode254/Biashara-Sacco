@@ -1,0 +1,30 @@
+.App {
+    text-align: center;
+  }
+  .app__form {
+    position: absolute;
+    bottom: 0;
+    w
+  }
+  .app__formControl {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-around !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+  }
+  
+  .spacer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    margin-right: 50px;
+  }
+
+  .messageSender {
+
+  }

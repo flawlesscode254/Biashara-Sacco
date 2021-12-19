@@ -1,0 +1,35 @@
+.App {
+  text-align: center;
+}
+
+.navigation{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 3px;
+  background-color: rgb(31, 30, 30);
+  flex-direction: row;
+}
+
+.links{
+  text-decoration: none;
+  color: white;
+}
+
+.video-singles{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+.audio-singles{
+  margin-top: 20px;
+}
+.audio-sing{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}

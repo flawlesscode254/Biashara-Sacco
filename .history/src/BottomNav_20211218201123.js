@@ -1,0 +1,33 @@
+import * as React from "react";
+import Box from "@mui/material/Box";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
+import RestoreIcon from "@mui/icons-material/Restore";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Link } from "react-router-dom";
+import "./App.css";
+
+export default function SimpleBottomNavigation() {
+  const [value, setValue] = React.useState(0);
+
+  return (
+    <div className="navigation">
+      <Box sx={{ width: 500 }}>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          <Link to="/contact">
+            <p>Contact Us</p>
+          </Link>
+          <Link className="links" to="/about">
+            <p>About Us</p>
+          </Link>
+        </BottomNavigation>
+      </Box>
+    </div>
+  );
+}
