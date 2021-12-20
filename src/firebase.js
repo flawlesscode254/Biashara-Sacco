@@ -3,17 +3,17 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAbq0BKhhzj8RymXf1CIIQ_JpirQhckRBk",
+    apiKey: "AIzaSyAl4ZCx1yR7qnVniijfJX2C4ClScAzIKc8",
 
-    authDomain: "loaning-system-v1.firebaseapp.com",
+    authDomain: "biashara-sacco.firebaseapp.com",
   
-    projectId: "loaning-system-v1",
+    projectId: "biashara-sacco",
   
-    storageBucket: "loaning-system-v1.appspot.com",
+    storageBucket: "biashara-sacco.appspot.com",
   
-    messagingSenderId: "524165332894",
+    messagingSenderId: "614750631405",
   
-    appId: "1:524165332894:web:f5824cac02c8234402208f"  
+    appId: "1:614750631405:web:27dab2ff76c12c8c4ca3e4"
   
 };
 
