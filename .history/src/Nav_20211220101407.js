@@ -64,7 +64,12 @@ function Nav() {
                       size="small"
                       sx={{ ml: 2 }}
                     >
-                      <Avatar sx={{ width: 32, height: 32 }} />
+                      <Avatar
+                        sx={{ width: 32, height: 32 }}
+                        src={`https://avatars.dicebear.com/api/avataaars/${
+                          auth?.currentUser?.displayName.split(" ")[0]
+                        }.svg`}
+                      />
                     </IconButton>
                   </Tooltip>
                 </Box>
@@ -103,11 +108,19 @@ function Nav() {
                   anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                 >
                   <MenuItem>
-                  <Avatar sx={{ width: 32, height: 32 }} />
+                    <Avatar
+                      src={`https://avatars.dicebear.com/api/avataaars/${
+                        auth?.currentUser?.displayName.split(" ")[0]
+                      }.svg`}
+                    />
                     {auth?.currentUser?.displayName}
                   </MenuItem>
                   <MenuItem>
-                  <Avatar sx={{ width: 32, height: 32 }} />
+                    <Avatar
+                      src={`https://avatars.dicebear.com/api/avataaars/${
+                        auth?.currentUser?.displayName.split(" ")[0]
+                      }.svg`}
+                    />
                     {auth?.currentUser.email}
                   </MenuItem>
                   <MenuItem onClick={logOut}>

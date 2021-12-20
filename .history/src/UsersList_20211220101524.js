@@ -18,7 +18,6 @@ export default function AccessibleBadges() {
   }, []);
   useEffect(() => {
     db.collection("users")
-    .where("email", "!=", "admin@gmail.com")
     .onSnapshot((snapshot) => {
       setData(
         snapshot.docs.map((doc) => ({

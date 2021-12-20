@@ -64,7 +64,7 @@ function Nav() {
                       size="small"
                       sx={{ ml: 2 }}
                     >
-                      <Avatar sx={{ width: 32, height: 32 }} />
+
                     </IconButton>
                   </Tooltip>
                 </Box>
@@ -103,11 +103,11 @@ function Nav() {
                   anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
                 >
                   <MenuItem>
-                  <Avatar sx={{ width: 32, height: 32 }} />
+
                     {auth?.currentUser?.displayName}
                   </MenuItem>
                   <MenuItem>
-                  <Avatar sx={{ width: 32, height: 32 }} />
+
                     {auth?.currentUser.email}
                   </MenuItem>
                   <MenuItem onClick={logOut}>
