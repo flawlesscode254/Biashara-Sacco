@@ -12,9 +12,13 @@ const firebaseConfig = {
     storageBucket: "biashara-sacco.appspot.com",
   
     messagingSenderId: "614750631405",
+
   
     appId: "1:614750631405:web:27dab2ff76c12c8c4ca3e4"
-      
+>>>>>>> 3ba442dd29ae2184d096f0f6b3fc5ce6a52b0dac
+  
+    appId: "1:614750631405:web:27dab2ff76c12c8c4ca3e4"
+    
 };
 
 firebase.initializeApp(firebaseConfig);

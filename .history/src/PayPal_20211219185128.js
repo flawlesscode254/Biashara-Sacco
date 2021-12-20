@@ -77,9 +77,7 @@ function Product() {
   return (
     <div>
       <Nav />
-      {error && <div style={{
-        color: "white"
-      }}>Uh oh, an error occurred! {error.message}</div>}
+      {error && <div>Uh oh, an error occurred! {error.message}</div>}
       <h3 style={{
         color: "white"
       }}>
