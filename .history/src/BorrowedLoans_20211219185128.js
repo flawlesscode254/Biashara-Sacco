@@ -18,7 +18,7 @@ export default function Progress() {
   const history = useHistory();
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
-      if (!authUser || auth?.currentUser?.email !== "admin@gmail.com") {
+      if (!authUser || auth?.currentUser?.email !== "duncanii414@gmail.com") {
         history.push("/");
       }
     });
@@ -26,7 +26,7 @@ export default function Progress() {
   }, []);
 
   useEffect(() => {
-    db.collection("savings")
+    db.collection("loans")
       .orderBy("time", "desc")
       .onSnapshot((snapshot) => {
         setData(
@@ -41,6 +41,8 @@ export default function Progress() {
   return (
     <div>
       <Nav />
+      {/* Admin only access */}
+      {/* View the records of current borrowed loans and approve them */}
       <div
         style={{
           margin: 100,
@@ -107,6 +109,14 @@ export default function Progress() {
                   }}
                   align="right"
                 >
+                  Income
+                </TableCell>
+                <TableCell
+                  style={{
+                    color: "#FFFFFF",
+                  }}
+                  align="right"
+                >
                   Amount
                 </TableCell>
                 <TableCell
@@ -162,6 +172,10 @@ export default function Progress() {
                     {row.data.phone}
                   </TableCell>
                   <TableCell align="right">
+                    {row.data.income.toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                  </TableCell>
+                  <TableCell align="right">
                     {row.data.amount
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
@@ -190,7 +204,7 @@ export default function Progress() {
                         type="submit"
                         variant="outlined"
                         onClick={() => {
-                          db.collection("savings").doc(row.id).update({
+                          db.collection("loans").doc(row.id).update({
                             state: "yes",
                           });
                         }}

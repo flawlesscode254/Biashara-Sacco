@@ -10,7 +10,7 @@ import db, { auth } from "./firebase";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 
 import Nav from "./Nav";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Button } from "@mui/material";
 
 export default function Progress() {
@@ -18,15 +18,15 @@ export default function Progress() {
   const history = useHistory();
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
-      if (!authUser || auth?.currentUser?.email !== "admin@gmail.com") {
-        history.push("/");
-      }
+        if (!authUser || auth?.currentUser?.email !== "duncanii414@gmail.com") {
+            history.push("/");
+          }
     });
     // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
-    db.collection("savings")
+    db.collection("repayments")
       .orderBy("time", "desc")
       .onSnapshot((snapshot) => {
         setData(
@@ -59,7 +59,7 @@ export default function Progress() {
                     color: "#FFFFFF",
                   }}
                 >
-                  Date
+                  Date of payment
                 </TableCell>
                 <TableCell
                   style={{
@@ -67,7 +67,7 @@ export default function Progress() {
                   }}
                   align="right"
                 >
-                  ID
+                  Amount paid (Sh)
                 </TableCell>
                 <TableCell
                   style={{
@@ -75,7 +75,7 @@ export default function Progress() {
                   }}
                   align="right"
                 >
-                  Period
+                  ID Number
                 </TableCell>
                 <TableCell
                   style={{
@@ -83,7 +83,7 @@ export default function Progress() {
                   }}
                   align="right"
                 >
-                  Location
+                  Phone Number
                 </TableCell>
                 <TableCell
                   style={{
@@ -91,7 +91,7 @@ export default function Progress() {
                   }}
                   align="right"
                 >
-                  ID
+                  Email Address
                 </TableCell>
                 <TableCell
                   style={{
@@ -99,31 +99,7 @@ export default function Progress() {
                   }}
                   align="right"
                 >
-                  Phone
-                </TableCell>
-                <TableCell
-                  style={{
-                    color: "#FFFFFF",
-                  }}
-                  align="right"
-                >
-                  Amount
-                </TableCell>
-                <TableCell
-                  style={{
-                    color: "#FFFFFF",
-                  }}
-                  align="right"
-                >
-                  Username
-                </TableCell>
-                <TableCell
-                  style={{
-                    color: "#FFFFFF",
-                  }}
-                  align="right"
-                >
-                  Interest)
+                  Pending balance
                 </TableCell>
                 <TableCell
                   style={{
@@ -145,38 +121,29 @@ export default function Progress() {
                     {new Date(row.data.time?.toDate()).toUTCString()}
                   </TableCell>
                   <TableCell align="right">
-                    <Link to={row.data.image}>
-                      <p>Id image</p>
-                    </Link>
+                    {row.data.paid
+                      .toString()
+                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </TableCell>
                   <TableCell align="right">
-                    {row.data.period}
-                  </TableCell>
-                  <TableCell align="right">
-                    {row.data.location}
-                  </TableCell>
-                  <TableCell align="right">
-                    {row.data.idNum}
+                    {row.data.IDNum}
                   </TableCell>
                   <TableCell align="right">
                     {row.data.phone}
                   </TableCell>
                   <TableCell align="right">
-                    {row.data.amount
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    {row.data.email}
                   </TableCell>
-                  <TableCell align="right">{row.data.name}</TableCell>
                   <TableCell align="right">
-                    {row.data.interest
+                    {row.data.balance
                       .toString()
                       .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </TableCell>
                   <TableCell align="right">
                     {row.data.state === "yes" ? (
-                      <DoneAllIcon
+                      <DoneAllIcon 
                         style={{
-                          color: "green",
+                            color: "green"
                         }}
                       />
                     ) : (
@@ -190,7 +157,7 @@ export default function Progress() {
                         type="submit"
                         variant="outlined"
                         onClick={() => {
-                          db.collection("savings").doc(row.id).update({
+                          db.collection("repayments").doc(row.id).update({
                             state: "yes",
                           });
                         }}

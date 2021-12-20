@@ -18,7 +18,7 @@ export default function Progress() {
   const history = useHistory();
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
-      if (!authUser || auth?.currentUser?.email !== "admin@gmail.com") {
+      if (!authUser || auth?.currentUser?.email !== "duncanii414@gmail.com") {
         history.push("/");
       }
     });

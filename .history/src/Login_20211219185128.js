@@ -19,7 +19,7 @@ function Login() {
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
         if (authUser) {
-          if (auth?.currentUser?.email === "admin@gmail.com") {
+          if (auth?.currentUser?.email === "duncanii414@gmail.com") {
             history.push("/borrowed");
           }
           else {

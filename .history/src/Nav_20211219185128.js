@@ -36,7 +36,7 @@ function Nav() {
     <>
       {user ? (
         <div>
-          {auth?.currentUser?.email === "admin@gmail.com" ? (
+          {auth?.currentUser?.email === "duncanii414@gmail.com" ? (
             <div className="navigation">
               <Link className="links" to="/borrowed">
                 <p>Borrowed Loans</p>

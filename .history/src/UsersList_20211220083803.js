@@ -3,11 +3,10 @@ import Badge from "@mui/material/Badge";
 import db, {auth} from "./firebase";
 import { Avatar } from "@mui/material";
 import { deepOrange } from "@mui/material/colors";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function AccessibleBadges() {
   const [data, setData] = useState([]);
-  const history = useHistory
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
         if (!authUser || auth?.currentUser?.email !== "admin@gmail.com") {
