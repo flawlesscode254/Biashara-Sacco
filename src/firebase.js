@@ -3,18 +3,12 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAl4ZCx1yR7qnVniijfJX2C4ClScAzIKc8",
-
-    authDomain: "biashara-sacco.firebaseapp.com",
-  
-    projectId: "biashara-sacco",
-  
-    storageBucket: "biashara-sacco.appspot.com",
-  
-    messagingSenderId: "614750631405",
-  
-    appId: "1:614750631405:web:27dab2ff76c12c8c4ca3e4"
-      
+  apiKey: "AIzaSyCH4k_ZrOvOBFSAwPisEX_50LEu4K_U4DA",
+  authDomain: "bishara-sacco.firebaseapp.com",
+  projectId: "bishara-sacco",
+  storageBucket: "bishara-sacco.appspot.com",
+  messagingSenderId: "583079822937",
+  appId: "1:583079822937:web:13b9d61ce0fe6e09f01348",
 };
 
 firebase.initializeApp(firebaseConfig);
